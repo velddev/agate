@@ -94,6 +94,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Repos\BumboEngine\BumboEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -129,15 +130,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TextReader.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="source\Graphics\Shader.cpp" />
+    <ClCompile Include="source\Graphics\RenderSystem.cpp" />
+    <ClCompile Include="source\IO\File.cpp" />
+    <ClCompile Include="source\IO\TextReader.cpp" />
+    <ClCompile Include="source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_shader.glsl" />
     <None Include="vertex_shader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TextReader.h" />
+    <ClInclude Include="include\IO\File.h" />
+    <ClInclude Include="include\IO\TextReader.h" />
+    <ClInclude Include="include\Graphics\RenderSystem.h" />
+    <ClInclude Include="include\Graphics\Shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

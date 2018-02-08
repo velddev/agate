@@ -131,6 +131,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Utils\HashingUtils.cpp" />
+    <ClCompile Include="source\Engine\Resources\AssetManager.cpp" />
+    <ClCompile Include="source\Engine\Resources\Resource.cpp" />
     <ClCompile Include="source\Graphics\Material.cpp" />
     <ClCompile Include="source\Graphics\Mesh.cpp" />
     <ClCompile Include="source\Graphics\Model.cpp" />
@@ -146,6 +149,8 @@
     <None Include="vertex_shader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Utils\HashingUtils.h" />
+    <ClInclude Include="include\Engine\Resources\AssetManager.h" />
     <ClInclude Include="include\IO\File.h" />
     <ClInclude Include="include\IO\TextReader.h" />
     <ClInclude Include="include\Graphics\RenderSystem.h" />
@@ -154,6 +159,8 @@
     <ClInclude Include="include\Graphics\Transform.h" />
     <ClInclude Include="include\Graphics\Mesh.h" />
     <ClInclude Include="include\Graphics\Material.h" />
+    <ClInclude Include="include\Engine\Resources\Asset.h" />
+    <ClInclude Include="include\Engine\Resources\Loadable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

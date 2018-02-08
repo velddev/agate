@@ -4,10 +4,12 @@
 #include "Graphics/Mesh.h"
 #include "Graphics/Material.h"
 
+#include "Engine/Resources/Loadable.h"
+
 #include <string>
 #include <vector>
 
-class Model
+class Model : Loadable
 {
 public:
 	Model();
@@ -16,6 +18,8 @@ public:
 	Transform *transform = new Transform();
 
 	void Draw();
+
+	virtual void Load(char *filePath);
 
 	void SetShader(Shader *shader);
 

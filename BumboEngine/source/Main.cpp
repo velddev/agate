@@ -58,9 +58,8 @@ int main()
 
 		model->Draw();
 
-		model->transform->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
 		model->transform->SetPosition(glm::vec3(0.0f, 0.0f, 8.0f));
-		model->transform->Rotate(glm::vec3(0.001f, 0.0001f, 0.0f));
+		model->transform->Rotate(glm::vec3(0.001f, 0.0f, 0.0f));
 
 		glfwSwapBuffers(window);
 

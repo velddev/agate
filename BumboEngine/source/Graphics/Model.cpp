@@ -39,27 +39,17 @@ void Model::Draw()
 	shader->Unbind();
 }
 
-void Model::SetShader(Shader * shader)
-{
-	this->shader = shader;
-}
-
-Model *Model::FromFile(const char *filePath)
-{
-	return FromFile((char*)filePath);
-}
-Model *Model::FromFile(char *filePath)
+void Model::Load(char * filePath)
 {
 	const aiScene *scene = aiImportFile(filePath, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (!scene)
 	{
 		std::cout << "err | couldn't load file '" << aiGetErrorString() << "'" << std::endl;
-		return nullptr;
+		return;
 	}
 
-	Model *m = new Model();
-	m->allMeshes.reserve(scene->mNumMeshes);
+	allMeshes.reserve(scene->mNumMeshes);
 
 	for (int i = 0; i < scene->mNumMeshes; i++)
 	{
@@ -72,7 +62,7 @@ Model *Model::FromFile(char *filePath)
 		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
 
 		Material *mat = new Material();
-		
+
 		aiColor4D diffuseColor;
 
 		aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &diffuseColor);
@@ -85,10 +75,10 @@ Model *Model::FromFile(char *filePath)
 			aiVector3D vert = mesh->mVertices[j];
 			aiVector3D norm = mesh->mNormals[j];
 
-			newMesh->vertices.push_back({ 
-				{vert.x, vert.y, vert.z, 1}, 
-				{norm.x, norm.y, norm.z, 1} 
-			});
+			newMesh->vertices.push_back({
+				{ vert.x, vert.y, vert.z, 1 },
+				{ norm.x, norm.y, norm.z, 1 }
+				});
 		}
 
 		// Load indices
@@ -106,10 +96,24 @@ Model *Model::FromFile(char *filePath)
 
 		newMesh->Setup();
 
-		m->allMeshes.push_back(newMesh);
+		allMeshes.push_back(newMesh);
 	}
-	
+
 	aiReleaseImport(scene);
-	return m;
 }
 
+void Model::SetShader(Shader * shader)
+{
+	this->shader = shader;
+}
+
+Model *Model::FromFile(const char *filePath)
+{
+	return FromFile((char*)filePath);
+}
+Model *Model::FromFile(char *filePath)
+{
+	Model *model = new Model();
+	model->Load(filePath);
+	return model;
+}

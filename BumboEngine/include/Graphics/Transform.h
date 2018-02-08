@@ -33,5 +33,5 @@ private:
 
 	glm::mat4 modelMatrix;
 	
-	bool hasChanged;
+	bool hasChanged = true;
 };

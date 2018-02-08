@@ -5,15 +5,8 @@
 #include <glew/glew.h>
 #include <glfw/glfw3.h>
 
-#include "Graphics\Shader.h"
-
-#define GLEW_STATIC
-
-float vertices[] = {
-	-0.5f, -0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	0.0f,  0.5f, 0.0f,
-};
+#include "Graphics/Shader.h"
+#include "Graphics/Model.h"
 
 int main()
 {
@@ -38,11 +31,10 @@ int main()
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 	}
 
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	Model *model = Model::FromFile("./assets/ico.obj");
 
 	Shader *shader = new Shader();
 
@@ -54,28 +46,21 @@ int main()
 
 	shader->Compile();
 
-	unsigned int VAO;
-	glGenVertexArrays(1, &VAO);
+	model->SetShader(shader);
 
-	glClearColor(1.0f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+	printf("starting event loop...\n");
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// 0. copy our vertices array in a buffer for OpenGL to use
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		// 1. then set the vertex attributes pointers
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-		// 2. use our shader program when we want to render an object
-		shader->Bind();
+		model->Draw();
 
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		shader->Unbind();
+		model->transform->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
+		model->transform->SetPosition(glm::vec3(0.0f, 0.0f, 8.0f));
+		model->transform->Rotate(glm::vec3(0.001f, 0.0001f, 0.0f));
 
 		glfwSwapBuffers(window);
 

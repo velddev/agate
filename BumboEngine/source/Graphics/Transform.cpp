@@ -13,6 +13,7 @@ glm::mat4 Transform::GetModelMatrix()
 	if (hasChanged)
 	{
 		modelMatrix = GetTranslationMatrix() * GetRotationMatrix() * GetScaleMatrix();
+		hasChanged = false;
 	}
 	return modelMatrix;
 }
@@ -34,7 +35,7 @@ glm::mat4 Transform::GetScaleMatrix()
 
 glm::vec3 Transform::GetPosition()
 {
-	return { translationMatrix[0][4], translationMatrix[1][4], translationMatrix[2][4] };
+	return { translationMatrix[3][0], translationMatrix[3][1], translationMatrix[3][2] };
 }
 
 glm::vec3 Transform::GetRotation()
@@ -49,15 +50,16 @@ glm::vec3 Transform::GetScale()
 
 void Transform::SetPosition(glm::vec3 newPosition)
 {
-	translationMatrix[0][4] = newPosition.x;
-	translationMatrix[1][4] = newPosition.y;
-	translationMatrix[2][4] = newPosition.z;
+	translationMatrix[3][0] = newPosition.x;
+	translationMatrix[3][1] = newPosition.y;
+	translationMatrix[3][2] = newPosition.z;
 	hasChanged = true;
 }
 
 void Transform::SetRotation(glm::vec3 newRotation)
 {
 	rotationQuaternion = glm::quat(newRotation);
+	hasChanged = true;
 }
 
 void Transform::SetScale(glm::vec3 newScale)
@@ -75,5 +77,5 @@ void Transform::Translate(glm::vec3 addedPosition)
 
 void Transform::Rotate(glm::vec3 addedRotation)
 {
-	rotationQuaternion = glm::quat(GetRotation() + addedRotation);
+	SetRotation(GetRotation() + addedRotation);
 }

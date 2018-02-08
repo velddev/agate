@@ -42,6 +42,15 @@
     <ClCompile Include="source\Graphics\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\Graphics\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex_shader.glsl">
@@ -62,6 +71,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Graphics\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

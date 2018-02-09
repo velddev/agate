@@ -27,6 +27,8 @@ public:
 	static Model *FromFile(const char *filePath);
 	static Model *FromFile(char *filePath);
 
+	glm::vec3 color = { 1.0f, 1.0f, 1.0f };
+
 private:
 	Shader *shader = new Shader();
 

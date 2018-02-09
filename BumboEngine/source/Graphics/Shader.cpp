@@ -1,5 +1,3 @@
-#include <glew/glew.h>
-
 #include <vector>
 
 #include "Graphics/Shader.h"
@@ -17,9 +15,13 @@ Shader::~Shader()
 void Shader::Bind()
 {
 	glUseProgram(programId);
-	if (textureId != 0)
+	if (textures.size() > 0)
 	{
-		glBindTexture(GL_TEXTURE_2D, textureId);
+		for (int i = 0; i < textures.size(); i++)
+		{
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, textures[i]);
+		}
 	}
 }
 
@@ -39,17 +41,14 @@ GLint Shader::GetProgramId()
 
 void Shader::Load(char *filePath)
 {
-	std::string extension = std::string(filePath);
-	int offset = extension.find_last_of(".");
-	extension = extension.substr(offset + 1);
-
 	GLint shaderId = FromFile(filePath);
+	GLint shaderType = GetType(filePath);
 
-	if (extension == "vs")
+	if (shaderType == GL_VERTEX_SHADER)
 	{
 		vertexShader = shaderId;
 	}
-	else if (extension == "fs")
+	else if (shaderType == GL_FRAGMENT_SHADER)
 	{
 		fragmentShader = shaderId;
 	}
@@ -64,9 +63,13 @@ void Shader::SetFragmentShader(GLint shaderId)
 	}
 }
 
-void Shader::SetTexture(GLuint textureHandle)
+void Shader::SetTexture(GLuint textureHandle, int index)
 {
-	textureId = textureHandle;
+	while (textures.size() <= index)
+	{
+		textures.push_back(textureHandle);
+	}
+	textures[index] = textureHandle;
 }
 
 void Shader::SetVertexShader(GLint shaderId)
@@ -78,7 +81,31 @@ void Shader::SetVertexShader(GLint shaderId)
 	}
 }
 
-void Shader::SetUniformVec3(const char *fieldName, glm::vec3 vector)
+void Shader::SetUniform1i(const char * fieldName, int i)
+{
+	GLint id = glGetUniformLocation(programId, fieldName);
+
+	if (id == -1)
+	{
+		printf("err | uniform couldn't been found\n");
+	}
+
+	glUniform1i(id, i);
+}
+
+void Shader::SetUniform1f(const char * fieldName, float f)
+{
+	GLint id = glGetUniformLocation(programId, fieldName);
+
+	if (id == -1)
+	{
+		printf("err | uniform couldn't been found\n");
+	}
+
+	glUniform1f(id, f);
+}
+
+void Shader::SetUniform3f(const char *fieldName, glm::vec3 vector)
 {
 	GLint id = glGetUniformLocation(programId, fieldName);
 
@@ -116,20 +143,7 @@ GLint Shader::FromFile(char *shaderPath)
 	char *content = File::LoadText(shaderPath);
 	unsigned int shaderId;
 
-	std::string extension = std::string(shaderPath);
-	int offset = extension.find_last_of(".");
-	extension = extension.substr(offset + 1);
-
-	GLint shaderType = 0;
-
-	if (extension == "vs")
-	{
-		shaderType = GL_VERTEX_SHADER;
-	}
-	else if (extension == "fs")
-	{
-		shaderType = GL_FRAGMENT_SHADER;
-	}
+	GLint shaderType = GetType(shaderPath);
 
 	shaderId = glCreateShader(shaderType);
 
@@ -155,4 +169,20 @@ GLint Shader::FromFile(char *shaderPath)
 		return 0;
 	}
 	return shaderId;
+}
+
+GLint Shader::GetType(char *path)
+{
+	std::string extension = std::string(path);
+	int offset = extension.find_last_of(".");
+	extension = extension.substr(offset + 1);
+
+	if (extension == "vert")
+	{
+		return GL_VERTEX_SHADER;
+	}
+	else if (extension == "frag")
+	{
+		return GL_FRAGMENT_SHADER;
+	}
 }

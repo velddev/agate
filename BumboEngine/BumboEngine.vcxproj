@@ -84,6 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)BumboEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Imgui.lib;assimp.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -96,6 +97,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)BumboEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Imgui.lib;assimp.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -111,6 +113,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -126,6 +129,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -152,8 +156,8 @@
     <ClCompile Include="source\Graphics\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\fragment_shader.fs" />
-    <None Include="assets\vertex_shader.vs" />
+    <None Include="assets\fragment_shader.frag" />
+    <None Include="assets\vertex_shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Editor\ImguiImplementation.h" />
@@ -172,9 +176,6 @@
     <ClInclude Include="include\Graphics\Texture.h" />
     <ClInclude Include="include\Graphics\Lighting\PointLight.h" />
     <ClInclude Include="include\Graphics\RenderObject.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="assets\fragment_shader_image.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

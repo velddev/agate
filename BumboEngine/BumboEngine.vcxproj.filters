@@ -77,10 +77,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\vertex_shader.vs">
+    <None Include="assets\fragment_shader.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="assets\fragment_shader.fs">
+    <None Include="assets\vertex_shader.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -133,8 +133,5 @@
     <ClInclude Include="include\Graphics\RenderObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="assets\fragment_shader_image.glsl" />
   </ItemGroup>
 </Project>

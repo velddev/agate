@@ -2,7 +2,6 @@
 #include "Graphics/Shader.h"
 
 #include <glm/gtc/matrix_transform.hpp>
-#include "..\..\include\Graphics\RenderObject.h"
 
 RenderObject::RenderObject(RenderSystem *system)
 	: renderSystem(system)
@@ -24,11 +23,37 @@ void RenderObject::Draw()
 
 	model->GetShader()->SetUniformMat4("MVP", mvpMatrix);
 	model->GetShader()->SetUniformMat4("model", modelMatrix);
-	model->GetShader()->SetUniformVec3("ambientColor", renderSystem->GetAmbientColor());
+	model->GetShader()->SetUniform1f("renderSystem.ambientIntensity", renderSystem->GetAmbientIntensity());
+
+	model->GetShader()->SetUniform3f("material.ambient", material->ambient);
+
+	model->GetShader()->SetUniform1i("material.diffuse", 0);
+	model->GetShader()->SetUniform1i("material.specular", 1);
+	model->GetShader()->SetUniform1f("material.shininess", material->shininess);
+
+	model->GetShader()->SetUniform3f("viewPos", glm::vec3());
+
+	PointLight *pl = renderSystem->GetClosestLight(transform->GetPosition());
+
+	if (pl != nullptr)
+	{
+		model->GetShader()->SetUniform3f("light.position", pl->GetTransform()->GetPosition());
+		model->GetShader()->SetUniform3f("light.color", pl->GetColor() * pl->GetIntensity());
+	}
+	else
+	{
+		model->GetShader()->SetUniform3f("light.position", glm::vec3());
+		model->GetShader()->SetUniform3f("light.color", glm::vec3());
+	}
 
 	model->Draw();
 
 	model->GetShader()->Unbind();
+}
+
+Material * RenderObject::GetMaterial()
+{
+	return material;
 }
 
 Transform * RenderObject::GetTransform()

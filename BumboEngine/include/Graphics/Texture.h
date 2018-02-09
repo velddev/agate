@@ -1,6 +1,6 @@
 #pragma once
 #include <glew/glew.h>
-#include <stbi\stb_image.h>
+#include <stbi/stb_image.h>
 #include <glm/vec2.hpp>
 
 #include "Engine/Resources/Loadable.h"

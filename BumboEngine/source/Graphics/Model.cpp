@@ -25,7 +25,7 @@ void Model::Draw()
 	}
 }
 
-Shader * Model::GetShader()
+Shader *Model::GetShader()
 {
 	return shader;
 }
@@ -65,7 +65,10 @@ void Model::Load(char * filePath)
 		{
 			aiVector3D vert = mesh->mVertices[j];
 			aiVector3D norm = mesh->mNormals[j];
-			aiVector3D uv = mesh->mTextureCoords[0][j];
+			aiVector3D uv = { 0,0,0 };
+
+	
+				uv = mesh->mTextureCoords[0][j];
 
 			newMesh->vertices.push_back({
 				{ vert.x, vert.y, vert.z },

@@ -17,12 +17,17 @@ void RenderSystem::Add(RenderObject *model)
 	renderableModels.push_back(model);
 }
 
-RenderObject *RenderSystem::AddModel(Model *model)
+RenderObject *RenderSystem::Add(Model *model)
 {
 	RenderObject *renderObject = new RenderObject(this);
 	renderObject->SetModel(model);
 	Add(renderObject);
 	return renderObject;
+}
+
+void RenderSystem::AddLight(PointLight *light)
+{
+	lights.push_back(light);
 }
 
 GLuint RenderSystem::CreateRenderTarget()
@@ -39,7 +44,59 @@ void RenderSystem::ClearRenderTarget()
 
 glm::vec3 RenderSystem::GetAmbientColor()
 {
-	return ambientColor;
+	return settings.ambientColor;
+}
+
+float RenderSystem::GetAmbientIntensity()
+{
+	return settings.ambientIntensity;
+}
+
+PointLight * RenderSystem::GetClosestLight(glm::vec3 position)
+{
+	float closestDistance = 9999.0f;
+	int index = -1;
+
+	for (int i = 0; i < GetLightCount(); i++)
+	{
+		float dist = glm::distance(GetLight(i)->GetTransform()->GetPosition(), position);
+		if (dist < closestDistance)
+		{
+			index = i;
+			closestDistance = dist;
+		}
+	}
+
+	if (index == -1)
+	{
+		return nullptr;
+	}
+	return GetLight(index);
+}
+
+PointLight * RenderSystem::GetLight(int index)
+{
+	return lights[index];
+}
+
+int RenderSystem::GetLightCount()
+{
+	return lights.size();
+}
+
+RenderObject * RenderSystem::GetRenderObject(int index)
+{
+	return renderableModels[index];
+}
+
+int RenderSystem::GetRenderObjectCount()
+{
+	return renderableModels.size();
+}
+
+RenderSystemSettings RenderSystem::GetSettings()
+{
+	return settings;
 }
 
 void RenderSystem::Render()
@@ -87,5 +144,10 @@ void RenderSystem::UseRenderTarget(GLuint id, glm::vec2 size)
 
 void RenderSystem::SetAmbientColor(glm::vec3 color)
 {
-	ambientColor = color;
+	settings.ambientColor = color;
+}
+
+void RenderSystem::SetAmbientIntensity(float intensity)
+{
+	settings.ambientIntensity = intensity;
 }

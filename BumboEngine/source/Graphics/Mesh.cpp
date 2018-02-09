@@ -1,5 +1,3 @@
-#include <glew/glew.h>
-
 #include "Graphics/Mesh.h"
 
 Mesh::Mesh()

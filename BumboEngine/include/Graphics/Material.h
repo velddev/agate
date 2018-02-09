@@ -1,5 +1,7 @@
 #pragma once
-#include <glm/vec4.hpp>
+#include "Graphics/Texture.h"
+
+#include <glm/vec3.hpp>
 
 class Material
 {
@@ -7,10 +9,14 @@ public:
 	Material();
 	~Material();
 
-	glm::vec4 ambientColor;
-	glm::vec4 diffuseColor;
-	float shininessColor;
-	glm::vec4 specularColor;
+	glm::vec3 ambient;
+	
+	Texture *diffuse;
+	glm::vec3 diffuseColor;
+
+	Texture *specular;
+	glm::vec3 specularColor;
+	float shininess;
 
 private:
 };

@@ -11,11 +11,14 @@ public:
 
 	void Draw();
 
+	Material *GetMaterial();
+
 	Transform *GetTransform();
 
 	void SetModel(Model *model);
 
 private:
+	Material *material = new Material();
 	Model *model;
 	RenderSystem *renderSystem;
 	Transform *transform = new Transform();

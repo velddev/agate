@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{8001C6F4-6692-4183-9EDB-6CEDD7659406}</ProjectGuid>
-    <RootNamespace>BumboEngine</RootNamespace>
+    <ProjectGuid>{7F5D2BBF-1BCE-4922-94F8-729842715AFA}</ProjectGuid>
+    <RootNamespace>BumboEditor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -69,39 +69,22 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies/lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)Dependencies\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies/$(Platform);$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)BumboEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>Imgui.lib;assimp.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)BumboEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>Imgui.lib;assimp.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreAllDefaultLibraries>
-      </IgnoreAllDefaultLibraries>
-    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,7 +98,6 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Imgui.lib;assimp.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,42 +112,9 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Imgui.lib;assimp.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\Editor\ImguiImplementation.cpp" />
-    <ClCompile Include="source\Utils\HashingUtils.cpp" />
-    <ClCompile Include="source\Engine\Resources\AssetManager.cpp" />
-    <ClCompile Include="source\Engine\Resources\Resource.cpp" />
-    <ClCompile Include="source\Graphics\Material.cpp" />
-    <ClCompile Include="source\Graphics\Mesh.cpp" />
-    <ClCompile Include="source\Graphics\Model.cpp" />
-    <ClCompile Include="source\Graphics\Shader.cpp" />
-    <ClCompile Include="source\Graphics\RenderSystem.cpp" />
-    <ClCompile Include="source\IO\File.cpp" />
-    <ClCompile Include="source\IO\TextReader.cpp" />
-    <ClCompile Include="source\Main.cpp" />
-    <ClCompile Include="source\Graphics\Transform.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="fragment_shader.glsl" />
-    <None Include="vertex_shader.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Editor\ImguiImplementation.h" />
-    <ClInclude Include="include\Utils\HashingUtils.h" />
-    <ClInclude Include="include\Engine\Resources\AssetManager.h" />
-    <ClInclude Include="include\IO\File.h" />
-    <ClInclude Include="include\IO\TextReader.h" />
-    <ClInclude Include="include\Graphics\RenderSystem.h" />
-    <ClInclude Include="include\Graphics\Shader.h" />
-    <ClInclude Include="include\Graphics\Model.h" />
-    <ClInclude Include="include\Graphics\Transform.h" />
-    <ClInclude Include="include\Graphics\Mesh.h" />
-    <ClInclude Include="include\Graphics\Material.h" />
-    <ClInclude Include="include\Engine\Resources\Asset.h" />
-    <ClInclude Include="include\Engine\Resources\Loadable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

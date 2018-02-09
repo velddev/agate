@@ -76,9 +76,9 @@ void Model::Load(char * filePath)
 			aiVector3D norm = mesh->mNormals[j];
 
 			newMesh->vertices.push_back({
-				{ vert.x, vert.y, vert.z, 1 },
-				{ norm.x, norm.y, norm.z, 1 }
-				});
+				{ vert.x, vert.y, vert.z },
+				{ norm.x, norm.y, norm.z }
+			});
 		}
 
 		// Load indices

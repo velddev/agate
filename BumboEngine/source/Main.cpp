@@ -5,8 +5,12 @@
 #include <glew/glew.h>
 #include <glfw/glfw3.h>
 
+#include <imgui/imgui.h>
+#include "Editor/ImguiImplementation.h"
+
 #include "Graphics/Shader.h"
 #include "Graphics/Model.h"
+#include "Graphics/RenderSystem.h"
 
 #include "Engine/Resources/AssetManager.h"
 
@@ -27,6 +31,7 @@ int main()
 	}
 
 	glfwMakeContextCurrent(window);
+	glfwSwapInterval(1);
 
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
@@ -38,7 +43,19 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui_ImplGlfwGL3_Init(window, true);
+
+	ImGui::StyleColorsDark();
+
+
 	AssetManager *assetManager = new AssetManager();
+	RenderSystem *renderSystem = new RenderSystem();
+
+	GLuint target = renderSystem->CreateRenderTarget();
+	//renderSystem->UseRenderTarget(target, glm::vec2(640, 480));
+
 	Asset *ico = assetManager->Load<Model>("./assets/ico.obj");
 
 	std::cout << "items in cache: " << assetManager->GetCacheSize() << std::endl;
@@ -56,6 +73,8 @@ int main()
 
 	model->SetShader(shader);
 
+	renderSystem->Add(model);
+
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	printf("starting event loop...\n");
@@ -64,16 +83,29 @@ int main()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		model->Draw();
+		renderSystem->Render();
 
 		model->transform->SetPosition(glm::vec3(0.0f, 0.0f, 8.0f));
 		model->transform->Rotate(glm::vec3(0.001f, 0.0f, 0.0f));
+
+		
+		ImGui_ImplGlfwGL3_NewFrame();
+		
+		ImGui::Begin("window");
+
+		ImGui::Button("Hi");
+
+		ImGui::End();
+
+		ImGui::Render();
 
 		glfwSwapBuffers(window);
 
 		glfwPollEvents();
 	}
 
+	ImGui_ImplGlfwGL3_Shutdown();
+	ImGui::DestroyContext();
 	glfwTerminate();
 	return 0;
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include <glm/vec4.hpp>
+#include <glm/vec3.hpp>
 #include <vector>
 
 #include <Windows.h>
@@ -7,8 +7,8 @@
 
 struct Vertex
 {
-	glm::vec4 position;
-	glm::vec4 normal;
+	glm::vec3 position;
+	glm::vec3 normal;
 };
 
 class Mesh

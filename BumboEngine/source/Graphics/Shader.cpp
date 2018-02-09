@@ -17,6 +17,10 @@ Shader::~Shader()
 void Shader::Bind()
 {
 	glUseProgram(programId);
+	if (textureId != 0)
+	{
+		glBindTexture(GL_TEXTURE_2D, textureId);
+	}
 }
 
 void Shader::Compile()
@@ -28,9 +32,27 @@ void Shader::Compile()
 	glDeleteShader(fragmentShader);
 }
 
-void Shader::Unbind()
+GLint Shader::GetProgramId()
 {
-	glUseProgram(0);
+	return programId;
+}
+
+void Shader::Load(char *filePath)
+{
+	std::string extension = std::string(filePath);
+	int offset = extension.find_last_of(".");
+	extension = extension.substr(offset + 1);
+
+	GLint shaderId = FromFile(filePath);
+
+	if (extension == "vs")
+	{
+		vertexShader = shaderId;
+	}
+	else if (extension == "fs")
+	{
+		fragmentShader = shaderId;
+	}
 }
 
 void Shader::SetFragmentShader(GLint shaderId)
@@ -42,6 +64,11 @@ void Shader::SetFragmentShader(GLint shaderId)
 	}
 }
 
+void Shader::SetTexture(GLuint textureHandle)
+{
+	textureId = textureHandle;
+}
+
 void Shader::SetVertexShader(GLint shaderId)
 {
 	if (!isCompiled)
@@ -49,6 +76,18 @@ void Shader::SetVertexShader(GLint shaderId)
 		vertexShader = shaderId;
 		glAttachShader(programId, shaderId);
 	}
+}
+
+void Shader::SetUniformVec3(const char *fieldName, glm::vec3 vector)
+{
+	GLint id = glGetUniformLocation(programId, fieldName);
+
+	if (id == -1)
+	{
+		printf("err | uniform couldn't been found\n");
+	}
+
+	glUniform3f(id, vector.x, vector.y, vector.z);
 }
 
 void Shader::SetUniformMat4(const char *fieldName, glm::mat4 matrix)
@@ -63,15 +102,35 @@ void Shader::SetUniformMat4(const char *fieldName, glm::mat4 matrix)
 	glUniformMatrix4fv(id, 1, GL_FALSE, &matrix[0][0]);
 }
 
-GLint Shader::FromFile(const char *shaderPath, int shaderType)
+void Shader::Unbind()
 {
-	return FromFile((char*)shaderPath, shaderType);
+	glUseProgram(0);
 }
-GLint Shader::FromFile(char *shaderPath, int shaderType)
+
+GLint Shader::FromFile(const char *shaderPath)
+{
+	return FromFile((char*)shaderPath);
+}
+GLint Shader::FromFile(char *shaderPath)
 {
 	char *content = File::LoadText(shaderPath);
-
 	unsigned int shaderId;
+
+	std::string extension = std::string(shaderPath);
+	int offset = extension.find_last_of(".");
+	extension = extension.substr(offset + 1);
+
+	GLint shaderType = 0;
+
+	if (extension == "vs")
+	{
+		shaderType = GL_VERTEX_SHADER;
+	}
+	else if (extension == "fs")
+	{
+		shaderType = GL_FRAGMENT_SHADER;
+	}
+
 	shaderId = glCreateShader(shaderType);
 
 	glShaderSource(shaderId, 1, &content, NULL);
@@ -91,9 +150,8 @@ GLint Shader::FromFile(char *shaderPath, int shaderType)
 		std::string str(errorLog.begin(), errorLog.end());
 
 		printf(str.c_str());
-		// Provide the infolog in whatever manor you deem best.
-		// Exit with failure.
-		glDeleteShader(shaderId); // Don't leak the shader.
+
+		glDeleteShader(shaderId);
 		return 0;
 	}
 	return shaderId;

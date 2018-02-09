@@ -3,6 +3,7 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/Material.h"
+#include "Graphics/RenderSystem.h"
 
 #include "Engine/Resources/Loadable.h"
 
@@ -15,9 +16,9 @@ public:
 	Model();
 	~Model();
 
-	Transform *transform = new Transform();
-
 	void Draw();
+
+	Shader *GetShader();
 
 	virtual void Load(char *filePath);
 

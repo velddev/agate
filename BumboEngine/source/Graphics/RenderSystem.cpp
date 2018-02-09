@@ -1,6 +1,8 @@
 #include <glew/glew.h>
 
+#include "Graphics/Model.h"
 #include "Graphics/RenderSystem.h"
+#include "Graphics/RenderObject.h"
 
 RenderSystem::RenderSystem()
 {
@@ -10,9 +12,17 @@ RenderSystem::~RenderSystem()
 {
 }
 
-void RenderSystem::Add(Model *model)
+void RenderSystem::Add(RenderObject *model)
 {
 	renderableModels.push_back(model);
+}
+
+RenderObject *RenderSystem::AddModel(Model *model)
+{
+	RenderObject *renderObject = new RenderObject(this);
+	renderObject->SetModel(model);
+	Add(renderObject);
+	return renderObject;
 }
 
 GLuint RenderSystem::CreateRenderTarget()
@@ -25,6 +35,11 @@ GLuint RenderSystem::CreateRenderTarget()
 void RenderSystem::ClearRenderTarget()
 {
 	renderTargetId = 0;
+}
+
+glm::vec3 RenderSystem::GetAmbientColor()
+{
+	return ambientColor;
 }
 
 void RenderSystem::Render()
@@ -68,4 +83,9 @@ void RenderSystem::UseRenderTarget(GLuint id, glm::vec2 size)
 	{
 		return;
 	}
+}
+
+void RenderSystem::SetAmbientColor(glm::vec3 color)
+{
+	ambientColor = color;
 }

@@ -134,6 +134,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Graphics\RenderObject.cpp" />
+    <ClCompile Include="source\Graphics\Lighting\PointLight.cpp" />
     <ClCompile Include="source\Editor\ImguiImplementation.cpp" />
     <ClCompile Include="source\Utils\HashingUtils.cpp" />
     <ClCompile Include="source\Engine\Resources\AssetManager.cpp" />
@@ -147,10 +149,11 @@
     <ClCompile Include="source\IO\TextReader.cpp" />
     <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="source\Graphics\Transform.cpp" />
+    <ClCompile Include="source\Graphics\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment_shader.glsl" />
-    <None Include="vertex_shader.glsl" />
+    <None Include="assets\fragment_shader.fs" />
+    <None Include="assets\vertex_shader.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Editor\ImguiImplementation.h" />
@@ -166,6 +169,12 @@
     <ClInclude Include="include\Graphics\Material.h" />
     <ClInclude Include="include\Engine\Resources\Asset.h" />
     <ClInclude Include="include\Engine\Resources\Loadable.h" />
+    <ClInclude Include="include\Graphics\Texture.h" />
+    <ClInclude Include="include\Graphics\Lighting\PointLight.h" />
+    <ClInclude Include="include\Graphics\RenderObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\fragment_shader_image.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

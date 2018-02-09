@@ -6,7 +6,6 @@
 #include <assimp/postprocess.h>
 
 #include <glm/mat4x4.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
 #include <iostream>
 
@@ -20,28 +19,20 @@ Model::~Model()
 
 void Model::Draw()
 {
-	glm::mat4 model = glm::mat4();
-	glm::mat4 model_also = transform->GetModelMatrix();
-
-	glm::mat4 mvpMatrix = 
-		glm::perspective(90.0f, 4.0f / 3.0f, 0.1f, 100.0f) * 
-		glm::lookAt(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f, 1.0f, 0.0f)) *
-		model_also;
-
-	shader->Bind();
-
-	shader->SetUniformMat4("MVP", mvpMatrix);
-
-	for (auto x : allMeshes)
+	for (auto mesh : allMeshes)
 	{
-		x->Draw();
+		mesh->Draw();
 	}
-	shader->Unbind();
+}
+
+Shader * Model::GetShader()
+{
+	return shader;
 }
 
 void Model::Load(char * filePath)
 {
-	const aiScene *scene = aiImportFile(filePath, aiProcessPreset_TargetRealtime_MaxQuality);
+	const aiScene *scene = aiImportFile(filePath, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_GenUVCoords | aiProcess_TransformUVCoords);
 
 	if (!scene)
 	{
@@ -74,10 +65,12 @@ void Model::Load(char * filePath)
 		{
 			aiVector3D vert = mesh->mVertices[j];
 			aiVector3D norm = mesh->mNormals[j];
+			aiVector3D uv = mesh->mTextureCoords[0][j];
 
 			newMesh->vertices.push_back({
 				{ vert.x, vert.y, vert.z },
-				{ norm.x, norm.y, norm.z }
+				{ norm.x, norm.y, norm.z },
+				{ uv.x, uv.y }
 			});
 		}
 

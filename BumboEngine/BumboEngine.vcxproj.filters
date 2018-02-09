@@ -66,12 +66,21 @@
     <ClCompile Include="source\Editor\ImguiImplementation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\Graphics\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Lighting\PointLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\RenderObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertex_shader.glsl">
+    <None Include="assets\vertex_shader.vs">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="fragment_shader.glsl">
+    <None Include="assets\fragment_shader.fs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -115,5 +124,17 @@
     <ClInclude Include="include\Editor\ImguiImplementation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Graphics\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Lighting\PointLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\RenderObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\fragment_shader_image.glsl" />
   </ItemGroup>
 </Project>

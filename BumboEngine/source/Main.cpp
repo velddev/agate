@@ -8,6 +8,10 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Model.h"
 
+#include "Engine/Resources/AssetManager.h"
+
+#include <iostream>
+
 int main()
 {
 	GLFWwindow* window;
@@ -34,8 +38,12 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	Model *model = Model::FromFile("./assets/ico.obj");
+	AssetManager *assetManager = new AssetManager();
+	Asset *ico = assetManager->Load<Model>("./assets/ico.obj");
 
+	std::cout << "items in cache: " << assetManager->GetCacheSize() << std::endl;
+
+	Model *model = ico->Get<Model>();
 	Shader *shader = new Shader();
 
 	GLint fragmentShader = Shader::FromFile("fragment_shader.glsl", GL_FRAGMENT_SHADER);

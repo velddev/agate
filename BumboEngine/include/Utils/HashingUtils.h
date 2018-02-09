@@ -4,7 +4,7 @@
 class HashingUtils
 {
 public:
-	static std::uint64_t Djb2(unsigned char *str);
+	static std::uint64_t Djb2(char *str);
 
 private:
 	HashingUtils() {}

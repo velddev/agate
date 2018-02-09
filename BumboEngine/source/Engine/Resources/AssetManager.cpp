@@ -7,3 +7,8 @@ AssetManager::AssetManager()
 AssetManager::~AssetManager()
 {
 }
+
+int AssetManager::GetCacheSize()
+{
+	return assetCache.size();
+}

@@ -6,8 +6,12 @@
 class Asset
 {
 public:
-	Asset() {}
+	Asset(std::uint64_t hash) : hash(hash)
+	{}
+	
 	~Asset() {}
+
+	void SetResource(Loadable *resource);
 
 	template<class T>
 	T *Get();

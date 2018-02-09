@@ -2,6 +2,7 @@
 #include "Asset.h"
 #include "Loadable.h"
 #include "Utils/HashingUtils.h"
+#include <unordered_map>
 
 class AssetManager
 {
@@ -9,20 +10,41 @@ public:
 	AssetManager();
 	~AssetManager();
 
+	int GetCacheSize();
+
 	template<class T>
-	static Asset *Load(char *filePath);
+	Asset *Load(const char *filePath);
+	template<class T>
+	Asset *Load(char *filePath);
+
+private:
+	std::unordered_map<std::uint64_t, Asset*> assetCache;
 };
+
+template<class T>
+inline Asset *AssetManager::Load(const char *filePath)
+{
+	return Load<T>((char*)filePath);
+}
 
 template<class T>
 inline Asset *AssetManager::Load(char *filePath)
 {
-	Asset *asset = new Asset();
+	std::uint64_t hash = HashingUtils::Djb2(filePath);
 
-	T t = new T();
-	((Loadable*)t)->Load(filePath);
+	auto search = assetCache.find(hash);
+	if (search == assetCache.end()) {
+		Asset *asset = new Asset(hash);
 
-	asset->resource = t;
-	asset->hash = HashingUtils::Djb2(filePath);
+		T *t = new T();
+		((Loadable*)t)->Load(filePath);
 
-	return resource;
+		asset->SetResource((Loadable*)t);
+
+		assetCache.insert({
+			asset->GetHash(),
+			asset
+		});
+	}
+	return assetCache[hash];
 }

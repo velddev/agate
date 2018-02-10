@@ -2,6 +2,7 @@
 #include "Graphics/Shader.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <sstream>
 
 RenderObject::RenderObject(RenderSystem *system)
 	: renderSystem(system)
@@ -23,27 +24,34 @@ void RenderObject::Draw()
 
 	model->GetShader()->SetUniformMat4("MVP", mvpMatrix);
 	model->GetShader()->SetUniformMat4("model", modelMatrix);
+
 	model->GetShader()->SetUniform1f("renderSystem.ambientIntensity", renderSystem->GetAmbientIntensity());
 
 	model->GetShader()->SetUniform3f("material.ambient", material->ambient);
-
 	model->GetShader()->SetUniform1i("material.diffuse", 0);
 	model->GetShader()->SetUniform1i("material.specular", 1);
 	model->GetShader()->SetUniform1f("material.shininess", material->shininess);
 
 	model->GetShader()->SetUniform3f("viewPos", glm::vec3());
 
-	PointLight *pl = renderSystem->GetClosestLight(transform->GetPosition());
+	DirectionalLight *dirLight = renderSystem->GetDirectionalLight();
 
-	if (pl != nullptr)
+	model->GetShader()->SetUniform1f("dirLight.intensity", dirLight->GetIntensity());
+	model->GetShader()->SetUniform3f("dirLight.direction", dirLight->GetDirection());
+	model->GetShader()->SetUniform3f("dirLight.diffuse", dirLight->GetDirection());
+
+	std::vector<PointLight*> lights = renderSystem->GetAllLights(transform->GetPosition());
+
+	model->GetShader()->SetUniform1i("pointLightCount", lights.size());
+
+	for (int i = 0; i < lights.size(); i++)
 	{
-		model->GetShader()->SetUniform3f("light.position", pl->GetTransform()->GetPosition());
-		model->GetShader()->SetUniform3f("light.color", pl->GetColor() * pl->GetIntensity());
-	}
-	else
-	{
-		model->GetShader()->SetUniform3f("light.position", glm::vec3());
-		model->GetShader()->SetUniform3f("light.color", glm::vec3());
+		std::string index = std::to_string(i);
+		model->GetShader()->SetUniform3f(("pointLights[" + index + "].position").c_str(), lights[i]->GetTransform()->GetPosition());
+		model->GetShader()->SetUniform1f(("pointLights[" + index + "].constant").c_str(), lights[i]->GetIntensity());
+		model->GetShader()->SetUniform1f(("pointLights[" + index + "].linear").c_str(), lights[i]->GetLinear());
+		model->GetShader()->SetUniform1f(("pointLights[" + index + "].quadratic").c_str(), lights[i]->GetQuadratic());
+		model->GetShader()->SetUniform3f(("pointLights[" + index + "].diffuse").c_str(), lights[i]->GetColor());
 	}
 
 	model->Draw();

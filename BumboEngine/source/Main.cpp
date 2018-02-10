@@ -40,9 +40,11 @@ void RenderSystemWindow(RenderSystem *renderSystem)
 		ImGui::LabelText((std::string("l") + std::to_string(i)).c_str(), "object %i", i);
 
 		ImGui::ColorEdit3("material_ambt" + i, &ro->GetMaterial()->ambient[0]);
-//		ImGui::ImageButton((void*)ro->GetMaterial()->diffuse->GetHandle(), {100, 100});
-//		ImGui::ImageButton((void*)ro->GetMaterial()->specular->GetHandle(), { 100, 100 });
 		ImGui::InputFloat("material_shin" + i, &ro->GetMaterial()->shininess);
+
+		glm::vec3 pos = ro->GetTransform()->GetPosition();
+		ImGui::InputFloat3("transform_pos" + i, &pos[0]);
+		ro->GetTransform()->SetPosition(pos);
 
 		ImGui::Spacing();
 	}
@@ -68,6 +70,10 @@ void RenderSystemWindow(RenderSystem *renderSystem)
 		float intensity = light->GetIntensity();
 		ImGui::DragFloat("light_int" + i, &intensity, 0.0f, 1.0f);
 		light->SetIntensity(intensity);
+
+		float range = light->GetRange();
+		ImGui::DragFloat("light_range" + i, &range, 0.0f, 100.0f);
+		light->SetRange(range);
 
 		ImGui::Spacing();
 	}
@@ -111,6 +117,10 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CCW);
+
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui_ImplGlfwGL3_Init(window, true);
@@ -146,8 +156,10 @@ int main()
 	model->SetShader(shader);
 
 	RenderObject *icoObject = renderSystem->Add(model);
+	RenderObject *ico2Object = renderSystem->Add(model);
 
 	icoObject->GetTransform()->SetPosition({ 0.0f, 0.0f, -75.f });
+	icoObject->GetTransform()->SetPosition({ 20.0f, 0.0f, -75.f });
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 

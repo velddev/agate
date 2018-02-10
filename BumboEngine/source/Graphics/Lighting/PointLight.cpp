@@ -8,37 +8,34 @@ PointLight::~PointLight()
 {
 }
 
-glm::vec3 PointLight::GetColor()
+float PointLight::GetLinear()
 {
-	return color;
+	return linear;
 }
 
-float PointLight::GetIntensity()
+float PointLight::GetQuadratic()
 {
-	return intensity;
+	return quadratic;
 }
 
-float PointLight::GetRadius()
+float PointLight::GetRange()
 {
-	return radius;
+	return range;
 }
 
-Transform *PointLight::GetTransform()
+void PointLight::SetLinear(float linear)
 {
-	return transform;
+	this->linear = linear;
 }
 
-void PointLight::SetColor(glm::vec3 color)
+void PointLight::SetQuadratic(float quadratic)
 {
-	this->color = color;
+	this->quadratic = quadratic;
 }
 
-void PointLight::SetIntensity(float intensity)
+void PointLight::SetRange(float range)
 {
-	this->intensity = intensity;
-}
-
-void PointLight::SetRadius(float radius)
-{
-	this->radius = radius;
+	this->range = range;
+	linear = 4.5f / range;
+	quadratic = 75.0f / (range * range);
 }

@@ -5,6 +5,7 @@
 #include <glm/vec3.hpp>
 
 #include "Graphics/Lighting/PointLight.h"
+#include "Graphics/Lighting/DirectionalLight.h"
 
 class RenderObject;
 class Model;
@@ -34,10 +35,13 @@ public:
 
 	float GetAmbientIntensity();
 
+	std::vector<PointLight*> GetAllLights(glm::vec3 position);
+
 	PointLight *GetClosestLight(glm::vec3 position);
 
 	PointLight *GetLight(int index);
-	
+	DirectionalLight *GetDirectionalLight();
+
 	int GetLightCount();
 
 	RenderObject *GetRenderObject(int index);
@@ -55,6 +59,8 @@ public:
 private:
 	GLuint renderTargetId = 0;
 	GLuint renderTargetTextureId = 0;
+
+	DirectionalLight *directionalLight = new DirectionalLight();
 
 	std::vector<PointLight*> lights;
 	std::vector<RenderObject*> renderableModels;

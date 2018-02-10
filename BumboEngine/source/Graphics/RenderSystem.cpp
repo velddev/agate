@@ -52,6 +52,22 @@ float RenderSystem::GetAmbientIntensity()
 	return settings.ambientIntensity;
 }
 
+std::vector<PointLight*> RenderSystem::GetAllLights(glm::vec3 position)
+{
+	std::vector<PointLight*> lights;
+
+	for (int i = 0; i < GetLightCount(); i++)
+	{
+		float dist = glm::distance(GetLight(i)->GetTransform()->GetPosition(), position);
+		if (dist < GetLight(i)->GetRange())
+		{
+			lights.push_back(GetLight(i));
+		}
+	}
+
+	return lights;
+}
+
 PointLight * RenderSystem::GetClosestLight(glm::vec3 position)
 {
 	float closestDistance = 9999.0f;
@@ -77,6 +93,11 @@ PointLight * RenderSystem::GetClosestLight(glm::vec3 position)
 PointLight * RenderSystem::GetLight(int index)
 {
 	return lights[index];
+}
+
+DirectionalLight *RenderSystem::GetDirectionalLight()
+{
+	return directionalLight;
 }
 
 int RenderSystem::GetLightCount()

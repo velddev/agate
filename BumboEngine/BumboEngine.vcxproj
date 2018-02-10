@@ -138,6 +138,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Graphics\Lighting\DirectionalLight.cpp" />
+    <ClCompile Include="source\Graphics\Lighting\LightSource.cpp" />
     <ClCompile Include="source\Graphics\RenderObject.cpp" />
     <ClCompile Include="source\Graphics\Lighting\PointLight.cpp" />
     <ClCompile Include="source\Editor\ImguiImplementation.cpp" />
@@ -160,6 +162,7 @@
     <None Include="assets\vertex_shader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Graphics\Lighting\DirectionalLight.h" />
     <ClInclude Include="include\Editor\ImguiImplementation.h" />
     <ClInclude Include="include\Utils\HashingUtils.h" />
     <ClInclude Include="include\Engine\Resources\AssetManager.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="include\Graphics\Texture.h" />
     <ClInclude Include="include\Graphics\Lighting\PointLight.h" />
     <ClInclude Include="include\Graphics\RenderObject.h" />
+    <ClInclude Include="include\Graphics\Lighting\LightSource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

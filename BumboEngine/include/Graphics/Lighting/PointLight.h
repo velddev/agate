@@ -1,31 +1,25 @@
 #pragma once
 #include "Graphics/Transform.h"
+#include "Graphics/Lighting/LightSource.h"
 
 #include <glm/vec3.hpp>
 
-class PointLight
+class PointLight : public LightSource
 {
 public:
 	PointLight();
 	~PointLight();
 
-	glm::vec3 GetColor();
-	
-	float GetIntensity();
+	float GetLinear();
+	float GetQuadratic();
+	float GetRange();
 
-	float GetRadius();
+	void SetLinear(float linear);
+	void SetQuadratic(float quadratic);
+	void SetRange(float range);
 
-	Transform *GetTransform();
-
-	void SetColor(glm::vec3 color);
-
-	void SetIntensity(float intensity);
-
-	void SetRadius(float radius);
-
-private:
-	glm::vec3 color;
-	float intensity;
-	float radius;
-	Transform *transform = new Transform();
+protected:
+	float range = 0.f;
+	float linear = 0.35f;
+	float quadratic = 0.44f;
 };

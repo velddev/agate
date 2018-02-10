@@ -59,12 +59,12 @@ void RenderObject::Draw()
 	model->GetShader()->Unbind();
 }
 
-Material * RenderObject::GetMaterial()
+Material *RenderObject::GetMaterial()
 {
 	return material;
 }
 
-Transform * RenderObject::GetTransform()
+Transform *RenderObject::GetTransform()
 {
 	return transform;
 }

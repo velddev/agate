@@ -19,6 +19,8 @@
 
 #include <iostream>
 
+glm::vec3 clearColor = { 0.0f, 0.0f, 0.0f };
+
 void RenderSystemWindow(RenderSystem *renderSystem)
 {
 	ImGui::Begin("rendersystem");
@@ -27,9 +29,7 @@ void RenderSystemWindow(RenderSystem *renderSystem)
 	ImGui::SliderFloat("ambient intensity", &x, 0.0f, 1.0f);
 	renderSystem->SetAmbientIntensity(x);
 
-	glm::vec3 y = renderSystem->GetAmbientColor();
-	ImGui::ColorEdit3("ambient color", &y[0]);
-	renderSystem->SetAmbientColor(y);
+	ImGui::ColorEdit3("background color", &clearColor[0]);
 
 	ImGui::BeginChild("objects", { 0, 120 });
 
@@ -43,8 +43,14 @@ void RenderSystemWindow(RenderSystem *renderSystem)
 		ImGui::InputFloat("material_shin" + i, &ro->GetMaterial()->shininess);
 
 		glm::vec3 pos = ro->GetTransform()->GetPosition();
+		glm::vec3 rot = ro->GetTransform()->GetRotation();
+		glm::vec3 scl = ro->GetTransform()->GetScale();
 		ImGui::InputFloat3("transform_pos" + i, &pos[0]);
+		ImGui::InputFloat3("transform_rot" + i, &rot[0]);
+		ImGui::InputFloat3("transform_scl" + i, &scl[0]);
 		ro->GetTransform()->SetPosition(pos);
+		ro->GetTransform()->SetRotation(rot);
+		ro->GetTransform()->SetScale(scl);
 
 		ImGui::Spacing();
 	}
@@ -132,9 +138,9 @@ int main()
 
 	renderSystem->SetAmbientColor({ 1.0f, 1.0f, 1.0f });
 
-	Asset *ico = assetManager->Load<Model>("./assets/ico.fbx");
-	Asset *bumbo = assetManager->Load<Texture>("./assets/container2.png");
-	Asset *specularMap = assetManager->Load<Texture>("./assets/container2_specular.png");
+	Asset *ico = assetManager->Load<Model>("./assets/r8_gt_obj.fbx");
+	Asset *bumbo = assetManager->Load<Texture>("./assets/Map__122_VRayColor.jpg");
+	Asset *specularMap = assetManager->Load<Texture>("./assets/Map__87_VRayColor.jpg");
 	Asset *shaderAsset = assetManager->AddNew<Shader>(new Shader());
 
 	std::cout << "items in cache: " << assetManager->GetCacheSize() << std::endl;
@@ -156,20 +162,16 @@ int main()
 	model->SetShader(shader);
 
 	RenderObject *icoObject = renderSystem->Add(model);
-	RenderObject *ico2Object = renderSystem->Add(model);
 
-	icoObject->GetTransform()->SetPosition({ 0.0f, 0.0f, -75.f });
-	icoObject->GetTransform()->SetPosition({ 20.0f, 0.0f, -75.f });
+	icoObject->GetTransform()->SetPosition({ 0.0f, 0.0f, -100.f });
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	printf("starting event loop...\n");
 
 	while (!glfwWindowShouldClose(window))
 	{
+		glClearColor(clearColor.x, clearColor.y, clearColor.z, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		icoObject->GetTransform()->Rotate({ 0.005f, 0.0f, 0.0f });
 
 		renderSystem->Render();
 

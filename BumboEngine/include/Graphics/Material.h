@@ -16,7 +16,7 @@ public:
 
 	Texture *specular;
 	glm::vec3 specularColor;
-	float shininess;
+	float shininess = 32.0f;
 
 private:
 };

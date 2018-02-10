@@ -32,7 +32,7 @@ Shader *Model::GetShader()
 
 void Model::Load(char * filePath)
 {
-	const aiScene *scene = aiImportFile(filePath, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_GenUVCoords | aiProcess_TransformUVCoords);
+	const aiScene *scene = aiImportFile(filePath, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (!scene)
 	{
@@ -67,14 +67,16 @@ void Model::Load(char * filePath)
 			aiVector3D norm = mesh->mNormals[j];
 			aiVector3D uv = { 0,0,0 };
 
-	
+			if (mesh->HasTextureCoords(0))
+			{
 				uv = mesh->mTextureCoords[0][j];
+			}
 
 			newMesh->vertices.push_back({
 				{ vert.x, vert.y, vert.z },
 				{ norm.x, norm.y, norm.z },
 				{ uv.x, uv.y }
-			});
+				});
 		}
 
 		// Load indices
@@ -83,16 +85,19 @@ void Model::Load(char * filePath)
 		for (int j = 0; j < mesh->mNumFaces; j++)
 		{
 			// Check if this face is a triangle
-			assert(mesh->mFaces[j].mNumIndices == 3);
-
-			newMesh->indices.push_back(mesh->mFaces[j].mIndices[0]);
-			newMesh->indices.push_back(mesh->mFaces[j].mIndices[1]);
-			newMesh->indices.push_back(mesh->mFaces[j].mIndices[2]);
+			if (mesh->mFaces[j].mNumIndices == 3)
+			{
+				newMesh->indices.push_back(mesh->mFaces[j].mIndices[0]);
+				newMesh->indices.push_back(mesh->mFaces[j].mIndices[1]);
+				newMesh->indices.push_back(mesh->mFaces[j].mIndices[2]);
+			}
 		}
 
-		newMesh->Setup();
-
-		allMeshes.push_back(newMesh);
+		if (newMesh->indices.size() > 0)
+		{
+			newMesh->Setup();
+			allMeshes.push_back(newMesh);
+		}
 	}
 
 	aiReleaseImport(scene);

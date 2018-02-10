@@ -2,6 +2,7 @@
 
 PointLight::PointLight()
 {
+	SetRange(2500.f);
 }
 
 PointLight::~PointLight()

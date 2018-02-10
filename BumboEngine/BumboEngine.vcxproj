@@ -77,6 +77,14 @@
     <IncludePath>$(SolutionDir)Dependencies\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies/$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(SolutionDir)Dependencies/$(Platform);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)Dependencies\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies/$(Platform);$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -138,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\IO\Directory.cpp" />
     <ClCompile Include="source\Graphics\Lighting\DirectionalLight.cpp" />
     <ClCompile Include="source\Graphics\Lighting\LightSource.cpp" />
     <ClCompile Include="source\Graphics\RenderObject.cpp" />
@@ -162,6 +171,7 @@
     <None Include="assets\vertex_shader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\IO\Directory.h" />
     <ClInclude Include="include\Graphics\Lighting\DirectionalLight.h" />
     <ClInclude Include="include\Editor\ImguiImplementation.h" />
     <ClInclude Include="include\Utils\HashingUtils.h" />

@@ -40,7 +40,8 @@ glm::vec3 Transform::GetPosition()
 
 glm::vec3 Transform::GetRotation()
 {
-	return glm::eulerAngles(rotationQuaternion);
+	glm::vec3 eulerAngles = glm::eulerAngles(rotationQuaternion);
+	return glm::vec3(glm::degrees(eulerAngles.x), glm::degrees(eulerAngles.y), glm::degrees(eulerAngles.z));
 }
 
 glm::vec3 Transform::GetScale()
@@ -58,7 +59,7 @@ void Transform::SetPosition(glm::vec3 newPosition)
 
 void Transform::SetRotation(glm::vec3 newRotation)
 {
-	rotationQuaternion = glm::quat(newRotation);
+	rotationQuaternion = glm::quat(glm::vec3(glm::radians(newRotation.x), glm::radians(newRotation.y), glm::radians(newRotation.z)));
 	hasChanged = true;
 }
 

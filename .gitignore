@@ -39,6 +39,7 @@ TestResult.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
+imgui.ini
 
 # .NET Core
 project.lock.json
@@ -287,3 +288,4 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+BumboEngine/assets/

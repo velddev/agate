@@ -5,6 +5,6 @@ public:
 	Directory();
 	~Directory();
 
-	static Directory *Open(char *directory);
+	//static Directory *Open(char *directory);
 };
 

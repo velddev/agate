@@ -138,9 +138,9 @@ int main()
 
 	renderSystem->SetAmbientColor({ 1.0f, 1.0f, 1.0f });
 
-	Asset *ico = assetManager->Load<Model>("./assets/r8_gt_obj.fbx");
-	Asset *bumbo = assetManager->Load<Texture>("./assets/Map__122_VRayColor.jpg");
-	Asset *specularMap = assetManager->Load<Texture>("./assets/Map__87_VRayColor.jpg");
+	Asset *ico = assetManager->Load<Model>("./assets/ico.fbx");
+	Asset *bumbo = assetManager->Load<Texture>("./assets/container2.png");
+	Asset *specularMap = assetManager->Load<Texture>("./assets/container2_specular.png");
 	Asset *shaderAsset = assetManager->AddNew<Shader>(new Shader());
 
 	std::cout << "items in cache: " << assetManager->GetCacheSize() << std::endl;

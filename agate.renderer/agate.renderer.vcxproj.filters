@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\IO">
+      <UniqueIdentifier>{e5686121-54b8-45e9-8a8a-812a62ec1f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO">
+      <UniqueIdentifier>{08687c6a-ea66-4615-8d32-82c68c55d77c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{ee798547-286f-4862-b720-6cc3718eabfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{48458253-bd2e-4870-b9c4-80663f19d2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rendering">
+      <UniqueIdentifier>{d67e976c-bc59-43fa-8656-6fc8be5162d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO\FileSystem">
+      <UniqueIdentifier>{9164e303-4d17-43ef-8d76-e597927d0586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO\Assets">
+      <UniqueIdentifier>{f9a86f2e-652a-47f9-a0ed-ce74dbe6046f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{847d7fed-f9ed-40ea-bb81-91943d44ad77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO\FileSystem">
+      <UniqueIdentifier>{3e2ecdce-8f9b-454a-ab2e-220d2d01a7ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO\Assets">
+      <UniqueIdentifier>{2dbaf3a4-0e76-418a-b217-8a774e7c578b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\IO\TextReader.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\File.cpp">
+      <Filter>Source Files\IO\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\Directory.cpp">
+      <Filter>Source Files\IO\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\Resources\AssetManager.cpp">
+      <Filter>Source Files\IO\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Lighting\DirectionalLight.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utils\HashingUtils.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Editor\ImguiImplementation.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Lighting\LightSource.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Material.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Mesh.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Model.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Lighting\PointLight.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\RenderObject.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\RenderSystem.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\Resources\Resource.cpp">
+      <Filter>Source Files\IO\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Shader.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Texture.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Graphics\Transform.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\fragment_shader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="assets\vertex_shader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\IO\TextReader.h">
+      <Filter>Header Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\RenderObject.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Lighting\PointLight.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\RenderSystem.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Lighting\DirectionalLight.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IO\Directory.h">
+      <Filter>Header Files\IO\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IO\File.h">
+      <Filter>Header Files\IO\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\Resources\Asset.h">
+      <Filter>Header Files\IO\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\Resources\AssetManager.h">
+      <Filter>Header Files\IO\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\Resources\Loadable.h">
+      <Filter>Header Files\IO\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Lighting\LightSource.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Material.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Mesh.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Model.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Shader.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Texture.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\HashingUtils.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Editor\ImguiImplementation.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Transform.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

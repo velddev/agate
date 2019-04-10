@@ -25,16 +25,20 @@ glm::ivec2 Texture::GetSize()
 	return size;
 }
 
-void Texture::Load(char * filePath)
+void Texture::Load(char *filePath)
 {
 	stbi_uc *texture = stbi_load(filePath, &size.x, &size.y, &channelCount, 0);
 
 	int channelType = GL_RGBA;
 
 	if (channelCount == 3)
+	{
 		channelType = GL_RGB;
+	}
 	else if (channelCount == 1)
+	{
 		channelType = GL_R8;
+	}
 
 	glTexImage2D(GL_TEXTURE_2D, 0, channelType, size.x, size.y, 0, channelType, GL_UNSIGNED_BYTE, &texture[0]);
 	

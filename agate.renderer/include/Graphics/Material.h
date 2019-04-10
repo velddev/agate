@@ -1,5 +1,5 @@
 #pragma once
-#include "Graphics/Texture.h"
+#include "Texture.h"
 
 #include <glm/vec3.hpp>
 

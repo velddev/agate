@@ -23,6 +23,8 @@ glm::vec3 clearColor = { 0.0f, 0.0f, 0.0f };
 
 void RenderSystemWindow(RenderSystem *renderSystem)
 {
+	assert(renderSystem != nullptr, "renderSystem is nullptr");
+
 	ImGui::Begin("rendersystem");
 
 	float x = renderSystem->GetAmbientIntensity();

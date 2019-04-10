@@ -1,8 +1,11 @@
-#include "Graphics/RenderObject.h"
-#include "Graphics/Shader.h"
+#include "RenderObject.h"
+#include "Shader.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <sstream>
+
+using namespace agate::renderer;
+using namespace glm;
 
 RenderObject::RenderObject(RenderSystem *system)
 	: renderSystem(system)

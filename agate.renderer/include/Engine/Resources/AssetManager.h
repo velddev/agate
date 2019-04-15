@@ -15,53 +15,73 @@ public:
 	int GetCacheSize();
 
 	template<class T>
-	Asset *AddNew(T *newAsset);
+	Asset *AddNew(T* newAsset);
 
 	template<class T>
-	Asset *Load(const char *filePath);
+	Asset *Load(const char* filePath);
 	template<class T>
-	Asset *Load(char *filePath);
+	Asset *Load(char* filePath);
+	template<class T>
+	Asset* Load(std::vector<char*> filePaths);
 
 private:
+	template<class T, typename Arg>
+	Asset* LoadInternal(std::uint64_t hash, Arg& a);
+
 	std::unordered_map<std::uint64_t, Asset*> assetCache;
 };
 
 template<class T>
-inline Asset *AssetManager::AddNew(T *newAsset)
+inline Asset* AssetManager::AddNew(T *newAsset)
 {
-	char *generatedName = (char*)(std::string(typeid(newAsset).name()) + std::to_string(time(0))).c_str();
+	char *generatedName = (char*)(std::string(typeid(newAsset).name()) 
+		+ std::to_string(time(0))).c_str();
 	std::uint64_t hash = HashingUtils::Djb2(generatedName);
 
-	Asset *asset = new Asset(hash);
-	asset->SetResource((Loadable*)newAsset);
+	TAsset<T>* asset = new TAsset<T>(hash, newAsset);
 
 	assetCache.insert({
 		hash,
-		asset
+		(Asset*)asset
 	});
 	
-	return asset;
+	return (Asset*)asset;
 }
 
 template<class T>
-inline Asset *AssetManager::Load(const char *filePath)
+inline Asset* AssetManager::Load(const char *filePath)
 {
 	return Load<T>((char*)filePath);
 }
 
 template<class T>
-inline Asset *AssetManager::Load(char *filePath)
+inline Asset* AssetManager::Load(char* filePath)
 {
 	std::uint64_t hash = HashingUtils::Djb2(filePath);
+	return LoadInternal<T, char*>(hash, filePath);
+}
 
+template<class T>
+inline Asset* AssetManager::Load(std::vector<char*> filePath)
+{
+	std::uint64_t hash = HashingUtils::Djb2(filePath);
+	return LoadInternal<T, std::vector<char*>>(hash, filePath);
+}
+
+template<class T, typename Args>
+inline Asset* AssetManager::LoadInternal(std::uint64_t hash, Args& arg)
+{
 	auto search = assetCache.find(hash);
-	if (search == assetCache.end()) {
-		Asset *asset = new Asset(hash);
+	if (search == assetCache.end())
+	{
+		T* value = T::FromFile(arg);
+		if (value == nullptr)
+		{
+			// Asset failed loading.
+			value = new T();
+		}
 
-		T *t = new T();
-		((Loadable*)t)->Load(filePath);
-
-		asset->SetResource((Loadable*)t);
+		Asset* asset = new TAsset<T>(hash, value);
 
 		assetCache.insert({
 			asset->GetHash(),

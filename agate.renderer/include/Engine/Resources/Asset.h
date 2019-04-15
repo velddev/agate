@@ -6,25 +6,50 @@
 class Asset
 {
 public:
-	Asset(std::uint64_t hash) : hash(hash)
-	{}
-	
-	~Asset() {}
-
-	void SetResource(Loadable *resource);
+	virtual ~Asset() = default;
 
 	template<class T>
 	T *Get();
 
 	std::uint64_t GetHash();
 
-private:
+protected:
+	Asset(std::uint64_t hash)
+		: hash(hash)
+	{}
+
 	std::uint64_t hash;
-	Loadable *resource;
+
+private:
+	Asset() = default;
 };
 
 template<class T>
-inline T *Asset::Get()
+class TAsset : public Asset
 {
-	return (T*)resource;
+public:
+	TAsset(std::uint64_t hash)
+		: Asset(hash)
+	{}
+	TAsset(std::uint64_t hash, T* resource)
+		: Asset(hash), resource(resource)
+	{}
+
+	~TAsset() 
+	{
+		delete resource;
+	}
+
+	T* resource;
+};
+
+template<class T>
+inline T* Asset::Get()
+{
+	TAsset<T>* deepAsset = dynamic_cast<TAsset<T>*>(this);
+	if (deepAsset == nullptr)
+	{
+		return nullptr;
+	}
+	return deepAsset->resource;
 }

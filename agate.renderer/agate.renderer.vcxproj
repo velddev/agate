@@ -40,7 +40,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -75,8 +75,8 @@
     <LibraryPath>$(SolutionDir)Dependencies/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies/$(Platform);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)deps\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)deps/$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>$(SolutionDir)Dependencies/$(Platform);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
@@ -105,7 +105,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)BumboEngine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessToFile>false</PreprocessToFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -148,50 +148,53 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\IO\Directory.cpp" />
-    <ClCompile Include="source\Graphics\Lighting\DirectionalLight.cpp" />
-    <ClCompile Include="source\Graphics\Lighting\LightSource.cpp" />
-    <ClCompile Include="source\Graphics\RenderObject.cpp" />
-    <ClCompile Include="source\Graphics\Lighting\PointLight.cpp" />
+    <ClCompile Include="source\renderer\models\shader_base.cpp" />
+    <ClCompile Include="source\renderer\models\shader_compiled.cpp" />
+    <ClCompile Include="source\renderer\models\texture_cubemap.cpp" />
+    <ClCompile Include="source\IO\FileSystem\Directory.cpp" />
+    <ClCompile Include="source\IO\FileSystem\File.cpp" />
+    <ClCompile Include="source\renderer\tasks\rendertask.cpp" />
+    <ClCompile Include="source\renderer\Lighting\DirectionalLight.cpp" />
+    <ClCompile Include="source\renderer\Lighting\LightSource.cpp" />
+    <ClCompile Include="source\renderer\RenderObject.cpp" />
+    <ClCompile Include="source\renderer\Lighting\PointLight.cpp" />
     <ClCompile Include="source\Editor\ImguiImplementation.cpp" />
     <ClCompile Include="source\Utils\HashingUtils.cpp" />
     <ClCompile Include="source\Engine\Resources\AssetManager.cpp" />
     <ClCompile Include="source\Engine\Resources\Resource.cpp" />
-    <ClCompile Include="source\Graphics\Material.cpp" />
-    <ClCompile Include="source\Graphics\Mesh.cpp" />
-    <ClCompile Include="source\Graphics\Model.cpp" />
-    <ClCompile Include="source\Graphics\Shader.cpp" />
-    <ClCompile Include="source\Graphics\RenderSystem.cpp" />
-    <ClCompile Include="source\IO\File.cpp" />
+    <ClCompile Include="source\renderer\Material.cpp" />
+    <ClCompile Include="source\renderer\Mesh.cpp" />
+    <ClCompile Include="source\renderer\Model.cpp" />
+    <ClCompile Include="source\renderer\models\shader.cpp" />
+    <ClCompile Include="source\renderer\RenderSystem.cpp" />
     <ClCompile Include="source\IO\TextReader.cpp" />
-    <ClCompile Include="source\Main.cpp" />
-    <ClCompile Include="source\Graphics\Transform.cpp" />
-    <ClCompile Include="source\Graphics\Texture.cpp" />
+    <ClCompile Include="source\renderer\Transform.cpp" />
+    <ClCompile Include="source\renderer\models\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\fragment_shader.frag" />
-    <None Include="assets\vertex_shader.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\IO\Directory.h" />
-    <ClInclude Include="include\Graphics\Lighting\DirectionalLight.h" />
+    <ClInclude Include="include\renderer\models\shader_compiled.h" />
+    <ClInclude Include="include\renderer\models\texture_cubemap.h" />
+    <ClInclude Include="include\IO\filesystem\Directory.h" />
+    <ClInclude Include="include\IO\filesystem\File.h" />
+    <ClInclude Include="include\renderer\lighting\DirectionalLight.h" />
     <ClInclude Include="include\Editor\ImguiImplementation.h" />
     <ClInclude Include="include\Utils\HashingUtils.h" />
     <ClInclude Include="include\Engine\Resources\AssetManager.h" />
-    <ClInclude Include="include\IO\File.h" />
     <ClInclude Include="include\IO\TextReader.h" />
-    <ClInclude Include="include\Graphics\RenderSystem.h" />
-    <ClInclude Include="include\Graphics\Shader.h" />
-    <ClInclude Include="include\Graphics\Model.h" />
-    <ClInclude Include="include\Graphics\Transform.h" />
-    <ClInclude Include="include\Graphics\Mesh.h" />
-    <ClInclude Include="include\Graphics\Material.h" />
+    <ClInclude Include="include\renderer\RenderSystem.h" />
+    <ClInclude Include="include\renderer\models\shader.h" />
+    <ClInclude Include="include\renderer\Model.h" />
+    <ClInclude Include="include\renderer\Transform.h" />
+    <ClInclude Include="include\renderer\Mesh.h" />
+    <ClInclude Include="include\renderer\Material.h" />
     <ClInclude Include="include\Engine\Resources\Asset.h" />
     <ClInclude Include="include\Engine\Resources\Loadable.h" />
-    <ClInclude Include="include\Graphics\Texture.h" />
-    <ClInclude Include="include\Graphics\Lighting\PointLight.h" />
-    <ClInclude Include="include\Graphics\RenderObject.h" />
-    <ClInclude Include="include\Graphics\Lighting\LightSource.h" />
+    <ClInclude Include="include\renderer\Texture.h" />
+    <ClInclude Include="include\renderer\lighting\PointLight.h" />
+    <ClInclude Include="include\renderer\RenderObject.h" />
+    <ClInclude Include="include\renderer\lighting\LightSource.h" />
+    <ClInclude Include="include\renderer\tasks\rendertask.h" />
+    <ClInclude Include="include\renderer\models\shader_base.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -48,20 +48,8 @@
     <ClCompile Include="source\IO\TextReader.cpp">
       <Filter>Source Files\IO</Filter>
     </ClCompile>
-    <ClCompile Include="source\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\IO\File.cpp">
-      <Filter>Source Files\IO\FileSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="source\IO\Directory.cpp">
-      <Filter>Source Files\IO\FileSystem</Filter>
-    </ClCompile>
     <ClCompile Include="source\Engine\Resources\AssetManager.cpp">
       <Filter>Source Files\IO\Assets</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graphics\Lighting\DirectionalLight.cpp">
-      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="source\Utils\HashingUtils.cpp">
       <Filter>Source Files\Engine</Filter>
@@ -69,69 +57,64 @@
     <ClCompile Include="source\Editor\ImguiImplementation.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="source\Graphics\Lighting\LightSource.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graphics\Material.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graphics\Mesh.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graphics\Model.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graphics\Lighting\PointLight.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graphics\RenderObject.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Graphics\RenderSystem.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="source\Engine\Resources\Resource.cpp">
       <Filter>Source Files\IO\Assets</Filter>
     </ClCompile>
-    <ClCompile Include="source\Graphics\Shader.cpp">
+    <ClCompile Include="source\renderer\Lighting\DirectionalLight.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="source\Graphics\Texture.cpp">
+    <ClCompile Include="source\renderer\Lighting\LightSource.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="source\Graphics\Transform.cpp">
+    <ClCompile Include="source\renderer\Lighting\PointLight.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\fragment_shader.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="assets\vertex_shader.vert">
-      <Filter>Resource Files</Filter>
-    </None>
+    <ClCompile Include="source\renderer\Material.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\Mesh.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\Model.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\RenderObject.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\RenderSystem.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\Transform.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\tasks\rendertask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\FileSystem\Directory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\FileSystem\File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\models\shader_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\models\shader.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\models\shader_compiled.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\models\texture_cubemap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\renderer\models\texture.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IO\TextReader.h">
       <Filter>Header Files\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\RenderObject.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\Lighting\PointLight.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\RenderSystem.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\Lighting\DirectionalLight.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IO\Directory.h">
-      <Filter>Header Files\IO\FileSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IO\File.h">
-      <Filter>Header Files\IO\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="include\Engine\Resources\Asset.h">
       <Filter>Header Files\IO\Assets</Filter>
@@ -142,32 +125,62 @@
     <ClInclude Include="include\Engine\Resources\Loadable.h">
       <Filter>Header Files\IO\Assets</Filter>
     </ClInclude>
-    <ClInclude Include="include\Graphics\Lighting\LightSource.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\Material.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\Mesh.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\Model.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\Shader.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphics\Texture.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utils\HashingUtils.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="include\Editor\ImguiImplementation.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="include\Graphics\Transform.h">
+    <ClInclude Include="include\renderer\lighting\DirectionalLight.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\lighting\LightSource.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\lighting\PointLight.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\Material.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\Mesh.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\Model.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\RenderObject.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\RenderSystem.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\Texture.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\Transform.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\tasks\rendertask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IO\filesystem\Directory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IO\filesystem\File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\models\shader_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\models\shader_compiled.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\models\shader.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\renderer\models\texture_cubemap.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

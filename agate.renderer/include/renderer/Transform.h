@@ -10,7 +10,12 @@ namespace agate
 		{
 		public:
 			Transform() = default;
+			Transform(const Transform& t) = delete;
+			Transform(Transform&& t) = delete;
 			~Transform() = default;
+
+			Transform& operator=(const Transform& t) = delete;
+			Transform& operator=(Transform&& t) = delete;
 
 			const glm::mat4 GetModelMatrix();
 			const glm::mat4 GetRotationMatrix();

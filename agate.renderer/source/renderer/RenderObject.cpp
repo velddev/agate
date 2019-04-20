@@ -14,6 +14,8 @@ RenderObject::RenderObject(RenderSystem *system)
 
 RenderObject::~RenderObject()
 {
+	delete material;
+	delete transform;
 }
 
 void RenderObject::Draw()

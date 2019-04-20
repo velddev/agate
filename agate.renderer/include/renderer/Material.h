@@ -9,7 +9,7 @@ namespace agate::renderer
 	{
 	public:
 		Material() = default;
-		~Material() = delete;
+		~Material() = default;
 
 		glm::vec3 ambient;
 

@@ -10,7 +10,7 @@ TextureCubeMap::~TextureCubeMap()
 {
 }
 
-TextureCubeMap* agate::renderer::TextureCubeMap::FromFile(char* filePath)
+TextureCubeMap* TextureCubeMap::FromFile(char* filePath)
 {
 	return nullptr;
 }

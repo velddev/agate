@@ -14,6 +14,7 @@
 #include "renderer/RenderSystem.h"
 #include "renderer/RenderObject.h"
 #include "renderer/Texture.h"
+#include "renderer/models/texture_cubemap.h"
 
 #include "Engine/Resources/AssetManager.h"
 
@@ -145,8 +146,12 @@ int main()
 	renderSystem->SetAmbientColor({ 1.0f, 1.0f, 1.0f });
 
 	Asset* ico = assetManager->Load<Model>("./assets/ico.fbx");
-	Asset* bumbo = assetManager->Load<Texture>("./assets/container2.png");
+	Asset* bumbo = assetManager->Load<Texture>("./assets/container5151.png");
 	Asset* specularMap = assetManager->Load<Texture>("./assets/container2_specular.png");
+
+	TextureCubeMap* skybox = new TextureCubeMap();
+
+	Asset* skyMap = assetManager->AddNew<TextureCubeMap>(skybox);
 	Asset* shaderAsset = assetManager->AddNew<Shader>(new Shader());
 
 	std::cout << "items in cache: " << assetManager->GetCacheSize() << std::endl;
@@ -170,7 +175,6 @@ int main()
 	RenderObject* icoObject = renderSystem->Add(model);
 
 	icoObject->GetTransform()->SetPosition({ 0.0f, 0.0f, -100.f });
-
 
 	printf("starting event loop...\n");
 

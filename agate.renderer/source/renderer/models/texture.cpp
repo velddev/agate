@@ -6,6 +6,7 @@ Texture::Texture()
 {
 	glGenTextures(1, &handle);
 	glBindTexture(GL_TEXTURE_2D, handle);
+	channelCount = -1;
 }
 
 Texture::~Texture()

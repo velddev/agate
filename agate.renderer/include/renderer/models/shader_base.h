@@ -1,6 +1,8 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <map>
+#include <string>
 
 namespace agate::renderer
 {
@@ -18,7 +20,12 @@ namespace agate::renderer
 
 		void SetUniformMat4(const char* fieldName, glm::mat4 matrix);
 
+	protected:
+		GLint GetUniformLocation(const char* fieldName);
+
 	private:
+		std::map<std::string, GLint> uniformCache;
+
 		GLint programId;
 	};
 }

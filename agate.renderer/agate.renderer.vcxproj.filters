@@ -182,5 +182,8 @@
     <ClInclude Include="include\renderer\models\texture_cubemap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Engine\Resources\file_not_found_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

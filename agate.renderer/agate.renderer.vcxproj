@@ -172,6 +172,7 @@
     <ClCompile Include="source\renderer\models\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Engine\Resources\file_not_found_exception.h" />
     <ClInclude Include="include\renderer\models\shader_compiled.h" />
     <ClInclude Include="include\renderer\models\texture_cubemap.h" />
     <ClInclude Include="include\IO\filesystem\Directory.h" />

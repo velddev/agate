@@ -145,8 +145,8 @@ int main()
 
 	renderSystem->SetAmbientColor({ 1.0f, 1.0f, 1.0f });
 
-	Asset* ico = assetManager->Load<Model>("./assets/ico.fbx");
-	Asset* bumbo = assetManager->Load<Texture>("./assets/container5151.png");
+	Asset* ico = assetManager->Load<Model>("./assets/doda.fbx");
+	Asset* bumbo = assetManager->Load<Texture>("./assets/container2.png");
 	Asset* specularMap = assetManager->Load<Texture>("./assets/container2_specular.png");
 
 	TextureCubeMap* skybox = new TextureCubeMap();

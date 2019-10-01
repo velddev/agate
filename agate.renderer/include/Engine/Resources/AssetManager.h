@@ -1,5 +1,6 @@
 #pragma once
 #include "Asset.h"
+#include "Engine/Resources/file_not_found_exception.h"
 #include "Loadable.h"
 #include "Utils/HashingUtils.h"
 
@@ -77,8 +78,7 @@ inline Asset* AssetManager::LoadInternal(std::uint64_t hash, Args& arg)
 		T* value = T::FromFile(arg);
 		if (value == nullptr)
 		{
-			// Asset failed loading.
-			value = new T();
+			throw agate::FileNotLoadedException(arg);
 		}
 
 		Asset* asset = new TAsset<T>(hash, value);
